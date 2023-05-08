@@ -72,10 +72,12 @@ public class App {
         
         System.out.println("7. Funcionários ordenados pela idade+nome:");
 
+        Stream<Pessoa> idnome = lista.stream().sorted(Comparator.comparing(Pessoa::getIdade).thenComparing(Pessoa::getNome));
+        idnome.forEach(p -> System.out.println(p.toString()));
+
         System.out.println("8. Criar uma nova lista apenas com os funcionarios do financeiro:");
         ArrayList<Pessoa> finan = new ArrayList<>();
     
-
         Stream<Pessoa> financeiro = lista.stream().filter(f -> f.getDpto()==Departamento.FINANCEIRO);
         financeiro.forEach(f -> finan.add(f));
         for (Pessoa p : finan) {
