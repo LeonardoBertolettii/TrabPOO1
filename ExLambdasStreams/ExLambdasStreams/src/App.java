@@ -44,6 +44,7 @@ public class App {
 
         System.out.println("3. Nomes (em maiúsculas) dos funcionários do setor de vendas (usando reduce");
 
+        lista.forEach(p -> System.out.println(p.getNome().toUpperCase()));
 
 
         System.out.println("4. Todos os gerentes:");
