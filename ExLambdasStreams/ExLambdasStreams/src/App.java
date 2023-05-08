@@ -1,8 +1,13 @@
 import java.rmi.StubNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.sound.sampled.SourceDataLine;
 import javax.xml.crypto.dsig.spec.XPathType.Filter;
 
 public class App {
@@ -47,6 +52,7 @@ public class App {
         lista.forEach(p -> System.out.println(p.getNome().toUpperCase()));
 
 
+
         System.out.println("4. Todos os gerentes:");
 
         Stream<Pessoa> gerentes = lista.stream().filter(g -> g.getDpto() == Departamento.GERENCIA);
@@ -56,12 +62,19 @@ public class App {
 
         System.out.println("5. Idade média dos gerentes:");
 
+       
+
         System.out.println("6. Funcionarios ordenados pelo código:");
 
+        Stream<Pessoa> cod = lista.stream().sorted(Comparator.comparing(Pessoa::getCodigo));
+        cod.forEach(System.out::println);
+
+        
         System.out.println("7. Funcionários ordenados pela idade+nome:");
 
         System.out.println("8. Criar uma nova lista apenas com os funcionarios do financeiro:");
         ArrayList<Pessoa> finan = new ArrayList<>();
+    
 
         Stream<Pessoa> financeiro = lista.stream().filter(f -> f.getDpto()==Departamento.FINANCEIRO);
         financeiro.forEach(f -> finan.add(f));
@@ -70,7 +83,6 @@ public class App {
         }
 
         System.out.println("9. Nome e setor da pessoa mais jovem:");
-
-
+       
     }
 }
