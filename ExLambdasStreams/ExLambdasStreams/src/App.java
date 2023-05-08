@@ -62,9 +62,11 @@ public class App {
 
         System.out.println("5. Idade média dos gerentes:");
 
-       
+        double med = lista.stream().filter(m -> m.getDpto() == Departamento.GERENCIA).mapToDouble(p -> p.getIdade()).average().orElse(0);
+        System.out.println(med);
 
         System.out.println("6. Funcionarios ordenados pelo código:");
+
 
         Stream<Pessoa> cod = lista.stream().sorted(Comparator.comparing(Pessoa::getCodigo));
         cod.forEach(System.out::println);
@@ -76,15 +78,15 @@ public class App {
         idnome.forEach(p -> System.out.println(p.toString()));
 
         System.out.println("8. Criar uma nova lista apenas com os funcionarios do financeiro:");
-        ArrayList<Pessoa> finan = new ArrayList<>();
     
         Stream<Pessoa> financeiro = lista.stream().filter(f -> f.getDpto()==Departamento.FINANCEIRO);
-        financeiro.forEach(f -> finan.add(f));
-        for (Pessoa p : finan) {
-            System.out.println(p.getNome());
-        }
+        financeiro.forEach(p -> System.out.println(p.getNome()));
+        
 
         System.out.println("9. Nome e setor da pessoa mais jovem:");
-       
+       var menid = lista.stream().min(Comparator.comparing(Pessoa::getIdade));
+       if(menid.isPresent())
+              System.out.println(menid.get().getNome()+menid.get().getDpto());
+        else System.out.println("consulta nao existe");
     }
 }
