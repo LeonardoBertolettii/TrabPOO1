@@ -1,5 +1,9 @@
+import java.rmi.StubNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
+
+import javax.xml.crypto.dsig.spec.XPathType.Filter;
 
 public class App {
 
@@ -28,11 +32,26 @@ public class App {
           */
         System.out.println("1. Funcionários do setor de vendas:");
 
+        Stream<Pessoa> vendas = lista.stream().filter(c -> c.getDpto() == Departamento.VENDAS);
+        vendas.forEach(p -> System.out.println(p.getNome()));
+        
         System.out.println("2. Funcionários do setor de vendas com idade entre 20 e 30 anos");
+
+        Stream<Pessoa> ven2030 = lista.stream().filter(c -> c.getDpto() == Departamento.VENDAS).filter(c -> c.getIdade()>20).filter(c -> c.getIdade()<30);
+        ven2030.forEach(p -> System.out.println(p.getNome()));
+                                               
+
 
         System.out.println("3. Nomes (em maiúsculas) dos funcionários do setor de vendas (usando reduce");
 
+
+
         System.out.println("4. Todos os gerentes:");
+
+        Stream<Pessoa> gerentes = lista.stream().filter(g -> g.getDpto() == Departamento.GERENCIA);
+        gerentes.forEach(g ->  System.out.println(g.getNome()));
+
+
 
         System.out.println("5. Idade média dos gerentes:");
 
